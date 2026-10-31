@@ -1,0 +1,1044 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShopX - Online Store</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f3f3f3;
+            color: #222;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: #131921;
+            color: white;
+            min-height: 65px;
+
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            padding: 10px 25px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff9900;
+        }
+
+        .search-box {
+            flex: 1;
+            display: flex;
+            height: 42px;
+        }
+
+        .search-box input {
+            width: 100%;
+            border: none;
+            outline: none;
+
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .search-box button {
+            width: 55px;
+            border: none;
+            background: #febd69;
+
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .account,
+        .cart {
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        nav {
+            background: #232f3e;
+            padding: 12px 25px;
+
+            white-space: nowrap;
+            overflow-x: auto;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+
+            margin-right: 25px;
+            font-size: 15px;
+        }
+
+        nav a:hover {
+            color: #febd69;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 300px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            padding: 30px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #dfe9f3,
+                    #ffffff
+                );
+        }
+
+        .hero h1 {
+            font-size: 45px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .shop-btn {
+            border: none;
+            border-radius: 5px;
+
+            background: #ff9900;
+
+            padding: 13px 28px;
+
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        .shop-btn:hover {
+            background: #e88b00;
+        }
+
+        /* ================= SECTION ================= */
+
+        .section {
+            padding: 30px 25px;
+        }
+
+        .section h2 {
+            margin-bottom: 20px;
+        }
+
+        /* ================= CATEGORIES ================= */
+
+        .categories {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 20px;
+        }
+
+        .category {
+            background: white;
+
+            padding: 30px 15px;
+
+            text-align: center;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .category:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 5px 15px
+                rgba(0,0,0,0.15);
+        }
+
+        .category-icon {
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        /* ================= PRODUCT GRID ================= */
+
+        .products {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 20px;
+        }
+
+        /* ================= PRODUCT CARD ================= */
+
+        .product {
+            background: white;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            transition: 0.3s;
+
+            position: relative;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 5px 15px
+                rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: #f7f7f7;
+
+            border-radius: 6px;
+
+            overflow: hidden;
+
+            margin-bottom: 15px;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+        }
+
+        .product h3 {
+            margin-bottom: 8px;
+        }
+
+        .category-name {
+            font-size: 13px;
+            color: #777;
+
+            margin-bottom: 8px;
+        }
+
+        .rating {
+            color: #f5a623;
+
+            margin-bottom: 8px;
+        }
+
+        .price {
+            font-size: 22px;
+            font-weight: bold;
+
+            margin-bottom: 5px;
+        }
+
+        .old-price {
+            color: #777;
+
+            text-decoration: line-through;
+
+            font-size: 14px;
+
+            margin-bottom: 12px;
+        }
+
+        .discount {
+            color: #067d62;
+
+            font-size: 14px;
+
+            margin-bottom: 12px;
+        }
+
+        .add-cart {
+            width: 100%;
+
+            padding: 10px;
+
+            border: none;
+            border-radius: 5px;
+
+            background: #ffd814;
+
+            cursor: pointer;
+
+            font-size: 15px;
+        }
+
+        .add-cart:hover {
+            background: #f7ca00;
+        }
+
+        /* ================= NO PRODUCTS ================= */
+
+        .no-products {
+            text-align: center;
+
+            font-size: 20px;
+
+            padding: 50px;
+
+            display: none;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #131921;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 30px;
+
+            margin-top: 20px;
+        }
+
+        footer h3 {
+            color: #ff9900;
+            margin-bottom: 10px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 900px) {
+
+            .products {
+                grid-template-columns:
+                    repeat(3, 1fr);
+            }
+
+            .categories {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            header {
+                flex-wrap: wrap;
+            }
+
+            .search-box {
+                order: 3;
+
+                flex-basis: 100%;
+            }
+
+            .products {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+            .categories {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <div class="logo">
+            ShopX
+        </div>
+
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search products..."
+            >
+
+            <button onclick="searchProducts()">
+                🔍
+            </button>
+
+        </div>
+
+
+        <div class="account">
+            👤 Account
+        </div>
+
+
+        <div class="cart">
+            🛒 Cart
+            (<span id="cartCount">0</span>)
+        </div>
+
+    </header>
+
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <nav>
+
+        <a href="#home">
+            Home
+        </a>
+
+        <a href="#categories">
+            Categories
+        </a>
+
+        <a href="#products">
+            Products
+        </a>
+
+        <a href="#">
+            Deals
+        </a>
+
+        <a href="#">
+            Contact
+        </a>
+
+    </nav>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <div>
+
+            <h1>
+                Welcome to ShopX
+            </h1>
+
+            <p>
+                Discover amazing products at great prices.
+            </p>
+
+            <button
+                class="shop-btn"
+                onclick="scrollToProducts()"
+            >
+                Shop Now
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CATEGORIES ================= -->
+
+    <section
+        class="section"
+        id="categories"
+    >
+
+        <h2>
+            Shop by Category
+        </h2>
+
+
+        <div class="categories">
+
+            <div
+                class="category"
+                onclick="filterCategory('Electronics')"
+            >
+
+                <div class="category-icon">
+                    📱
+                </div>
+
+                <h3>
+                    Electronics
+                </h3>
+
+            </div>
+
+
+            <div
+                class="category"
+                onclick="filterCategory('Fashion')"
+            >
+
+                <div class="category-icon">
+                    👕
+                </div>
+
+                <h3>
+                    Fashion
+                </h3>
+
+            </div>
+
+
+            <div
+                class="category"
+                onclick="filterCategory('Home')"
+            >
+
+                <div class="category-icon">
+                    🏠
+                </div>
+
+                <h3>
+                    Home
+                </h3>
+
+            </div>
+
+
+            <div
+                class="category"
+                onclick="filterCategory('Gaming')"
+            >
+
+                <div class="category-icon">
+                    🎮
+                </div>
+
+                <h3>
+                    Gaming
+                </h3>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= PRODUCTS ================= -->
+
+    <section
+        class="section"
+        id="products"
+    >
+
+        <h2>
+            Popular Products
+        </h2>
+
+
+        <div
+            class="products"
+            id="productContainer"
+        >
+        </div>
+
+
+        <div
+            class="no-products"
+            id="noProducts"
+        >
+            😔 No products found.
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <h3>
+            ShopX
+        </h3>
+
+        <p>
+            Your simple online shopping destination.
+        </p>
+
+        <br>
+
+        <p>
+            © 2026 ShopX. All rights reserved.
+        </p>
+
+    </footer>
+
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        /*
+        ==========================================
+        PRODUCT DATA
+        ==========================================
+        */
+
+if (true) { 
+    
+}const products = [
+
+            {
+                id: 1,
+
+                name: "Wireless Headphones",
+
+                category: "Electronics",
+
+                price: 1999,
+
+                oldPrice: 2999,
+
+                rating: 4.8,
+
+                image:
+                "https://images.unsplash.com/photo-1505740420928-5e560c06d30e"
+            },
+
+
+            {
+                id: 2,
+
+                name: "Smart Watch",
+
+                category: "Electronics",
+
+                price: 2499,
+
+                oldPrice: 3999,
+
+                rating: 4.5,
+
+                image:
+                "https://images.unsplash.com/photo-1523275335684-37898b6baf30"
+            },
+
+
+            {
+                id: 3,
+
+                name: "Gaming Controller",
+
+                category: "Gaming",
+
+                price: 1499,
+
+                oldPrice: 1999,
+
+                rating: 4.7,
+
+                image:
+                "https://images.unsplash.com/photo-1600080972464-8e5f35f63d08"
+            },
+
+
+            {
+                id: 4,
+
+                name: "Sports Shoes",
+
+                category: "Fashion",
+
+                price: 1799,
+
+                oldPrice: 2999,
+
+                rating: 4.4,
+
+                image:
+                "https://images.unsplash.com/photo-1542291026-7eec264c27ff"
+            },
+
+
+            {
+                id: 5,
+
+                name: "Laptop",
+
+                category: "Electronics",
+
+                price: 54999,
+
+                oldPrice: 64999,
+
+                rating: 4.8,
+
+                image:
+                "https://images.unsplash.com/photo-1496181133206-80ce9b88a853"
+            },
+
+
+            {
+                id: 6,
+
+                name: "Backpack",
+
+                category: "Fashion",
+
+                price: 899,
+
+                oldPrice: 1499,
+
+                rating: 4.3,
+
+                image:
+                "https://images.unsplash.com/photo-1553062407-98eeb64c6a62"
+            },
+
+
+            {
+                id: 7,
+
+                name: "Table Lamp",
+
+                category: "Home",
+
+                price: 699,
+
+                oldPrice: 999,
+
+                rating: 4.2,
+
+                image:
+                "https://images.unsplash.com/photo-1507473885765-e6ed057f782c"
+            },
+
+
+            {
+                id: 8,
+
+                name: "Gaming Keyboard",
+
+                category: "Gaming",
+
+                price: 2199,
+
+                oldPrice: 2999,
+
+                rating: 4.6,
+
+                image:
+                "https://images.unsplash.com/photo-1587829741301-dc798b83add3"
+            }
+
+        ];
+
+
+        /*
+        ==========================================
+        CART
+        ==========================================
+        */
+
+        let cartCount = 0;
+
+
+        /*
+        ==========================================
+        DISPLAY PRODUCTS
+        ==========================================
+        */
+
+        function displayProducts(productList) {
+
+            const container =
+                document.getElementById(
+                    "productContainer"
+                );
+
+            const noProducts =
+                document.getElementById(
+                    "noProducts"
+                );
+
+
+            container.innerHTML = "";
+
+
+            if (productList.length === 0) {
+
+                noProducts.style.display =
+                    "block";
+
+                return;
+
+            }
+
+
+            noProducts.style.display =
+                "none";
+
+
+            productList.forEach(function(product) {
+
+                const discount =
+                    Math.round(
+                        (
+                            (product.oldPrice -
+                            product.price)
+                            /
+                            product.oldPrice
+                        ) * 100
+                    );
+
+
+                const card =
+                    document.createElement("div");
+
+
+                card.className =
+                    "product";
+
+
+                card.innerHTML = `
+
+                    <div class="product-image">
+
+                        <img
+                            src="${product.image}"
+                            alt="${product.name}"
+                        >
+
+                    </div>
+
+
+                    <div class="category-name">
+                        ${product.category}
+                    </div>
+
+
+                    <h3>
+                        ${product.name}
+                    </h3>
+
+
+                    <div class="rating">
+                        ⭐ ${product.rating}
+                    </div>
+
+
+                    <div class="price">
+                        ₹${product.price.toLocaleString("en-IN")}
+                    </div>
+
+
+                    <div class="old-price">
+                        ₹${product.oldPrice.toLocaleString("en-IN")}
+                    </div>
+
+
+                    <div class="discount">
+                        ${discount}% off
+                    </div>
+
+
+                    <button
+                        class="add-cart"
+                        onclick="addToCart(${product.id})"
+                    >
+                        Add to Cart 🛒
+                    </button>
+
+                `;
+
+
+                container.appendChild(card);
+
+            });
+
+        }
+
+
+        /*
+        ==========================================
+        ADD TO CART
+        ==========================================
+        */
+
+        function addToCart(productId) {
+
+            cartCount++;
+
+
+            document.getElementById(
+                "cartCount"
+            ).textContent = cartCount;
+
+
+            const product =
+                products.find(
+                    item => item.id === productId
+                );
+
+
+            alert(
+                `${product.name} added to cart! 🛒`
+            );
+
+        }
+
+
+        /*
+        ==========================================
+        SEARCH
+        ==========================================
+        */
+
+        function searchProducts() {
+
+            const search =
+                document.getElementById(
+                    "searchInput"
+                ).value
+                .toLowerCase()
+                .trim();
+
+
+            const filtered =
+                products.filter(function(product) {
+
+                    return (
+
+                        product.name
+                            .toLowerCase()
+                            .includes(search)
+
+                        ||
+
+                        product.category
+                            .toLowerCase()
+                            .includes(search)
+
+                    );
+
+                });
+
+
+            displayProducts(filtered);
+
+        }
+
+
+        /*
+        ==========================================
+        LIVE SEARCH
+        ==========================================
+        */
+
+        document
+            .getElementById("searchInput")
+            .addEventListener(
+                "input",
+                searchProducts
+            );
+
+
+        /*
+        ==========================================
+        CATEGORY FILTER
+        ==========================================
+        */
+
+        function filterCategory(category) {
+
+            const filtered =
+                products.filter(function(product) {
+
+                    return product.category === category;
+
+                });
+
+
+            displayProducts(filtered);
+
+
+            document
+                .getElementById("products")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+
+
+        /*
+        ==========================================
+        SHOP NOW
+        ==========================================
+        */
+
+        function scrollToProducts() {
+
+            document
+                .getElementById("products")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
+
+        }
+
+
+        /*
+        ==========================================
+        INITIAL LOAD
+        ==========================================
+        */
+
+        displayProducts(products);
+
+    </script>
+
+</body>
+</html>
